@@ -9,6 +9,9 @@
 # Date:   September 20 2020
 #-------------------------------------------------------------
 
+# Ask user to search for date:
+user_date = input("Specify a date to find Sara: ")
+
 # Create variable pointing to data file.
 file_name = './data/raw/sara.txt'
 
@@ -45,6 +48,26 @@ for lineString in line_list:
     
     # assign values to dictionary, only if LC = 1,2, or 3
     if obs_lc in ('1', '2', '3'):
-        print( f" Record {record_id} indicates Sara was seen at lat: {obs_lat} and lon: {obs_lon} on {obs_date}")
+        #print( f" Record {record_id} indicates Sara was seen at lat: {obs_lat} and lon: {obs_lon} on {obs_date}")
         date_dict[record_id] = obs_date
         coord_dict[record_id] = ( obs_lat, obs_lon )
+        
+# Create empty list to hold matching keys
+matching_keys = []
+        
+# After above filtering, loop through items in dictionary and collect keys for mathcing dates
+for date_item in date_dict.items():
+    the_key, the_date = date_item    
+    
+    # Does date match user date? If so, add keys to list
+    if the_date == user_date:
+        matching_keys.append(the_key)
+        
+# Reveal locations for each key in matching_keys list
+for matching_key in matching_keys:
+    the_lat, the_lon = coord_dict[matching_key]
+    # print(the_lat, the_lon)
+    print( f" Record {matching_key} indicates Sara was seen at lat: {the_lat} and lon: {the_lon} on {user_date}")
+        
+        
+    
