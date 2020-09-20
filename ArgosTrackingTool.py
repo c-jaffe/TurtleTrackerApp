@@ -22,18 +22,22 @@ line_list = file_object.readlines()
 file_object.close()
 
 
+### Loop!
+# Pull line of data from file...
 
-# Pull one line of data from file
-lineString = line_list[87]
-
-# Split string into list of items
-lineData = lineString.split()
-
-record_id = lineData[0]
-obs_date = lineData[2]
-obs_lc = lineData[4]
-obs_lat = lineData[6]
-obs_lon = lineData[7]
-
-print( f" Record {record_id} indicates Sara was seen at {obs_lat}N and {obs_lon}W on {obs_date}")
+for lineString in line_list:
+    
+    # skip over lines if first character is # or u (ie, first 17 lines)
+    if lineString[0] in ('#','u'); continue:
+        
+    # Split string into list of items
+    lineData = lineString.split()
+    
+    record_id = lineData[0]
+    obs_date = lineData[2]
+    obs_lc = lineData[4]
+    obs_lat = lineData[6]
+    obs_lon = lineData[7]
+    
+    print( f" Record {record_id} indicates Sara was seen at {obs_lat}N and {obs_lon}W on {obs_date}")
 
