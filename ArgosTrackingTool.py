@@ -21,23 +21,30 @@ line_list = file_object.readlines()
 # close file
 file_object.close()
 
+# Create 2 empty dictionary objects
+date_dict = {}
+coord_dict = {}
 
 ### Loop!
-# Pull line of data from file...
-
+# iterate thru all lines in list
 for lineString in line_list:
     
     # skip over lines if first character is # or u (ie, first 17 lines)
-    if lineString[0] in ('#','u'); continue:
+    if lineString[0] in ('#','u'): continue
         
     # Split string into list of items
     lineData = lineString.split()
     
+    # extract items in list to variables
     record_id = lineData[0]
     obs_date = lineData[2]
-    obs_lc = lineData[4]
+    obs_lc = lineData[4] 
     obs_lat = lineData[6]
     obs_lon = lineData[7]
     
-    print( f" Record {record_id} indicates Sara was seen at {obs_lat}N and {obs_lon}W on {obs_date}")
-
+    
+    # assign values to dictionary, only if LC = 1,2, or 3
+    if obs_lc in ('1', '2', '3'):
+        print( f" Record {record_id} indicates Sara was seen at lat: {obs_lat} and lon: {obs_lon} on {obs_date}")
+        date_dict[record_id] = obs_date
+        coord_dict[record_id] = ( obs_lat, obs_lon )
